@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded',() => {
             img: 'white.png'
         }
     ]
+
+cardArray.sort(() => 0.5 - Math.random())    
+
 const grid = document.querySelector('.grid');
 const resultDisplay = document.querySelector('#result'); 
 var cardsChosen = [];
@@ -45,7 +48,7 @@ function createBoard(){
         var card = document.createElement('img');
         card.setAttribute('src','images/blank.png');
         card.setAttribute('data-id',i);
-        // card.addEventListener('click',flipCard());
+        card.addEventListener('click',flipCard);
         grid.appendChild(card);
     }
 }
@@ -68,6 +71,10 @@ function checkForMatch(){
 
     cardsChosen = [];
     cardsChosenId = [];
+    resultDisplay.textContent = cardsWon.length;
+    if(cardsWon.length === cardArray.length/2){
+        resultDisplay.textContent = 'Congratulations! You found them all!';
+    }
 }
 
 //flip your card
@@ -76,7 +83,7 @@ function flipCard(){
     cardsChosen.push(cardArray[cardId].name);
     cardsChosenId.push(cardId);
     this.setAttribute('src',cardArray[cardId].img);
-    if(cardsChosen.length == 2){
+    if(cardsChosen.length === 2){
         setTimeout(checkForMatch,500);
     }
 }
