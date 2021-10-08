@@ -6,31 +6,47 @@ document.addEventListener('DOMContentLoaded',() => {
         },
         {
             name: 'cheeseburger',
-            img: 'cheeseburger.png'
-        },
-        {
-            name: 'blank',
-            img: 'blank.png'
+            img: 'images/cheeseburger.png'
         },
         {
             name: 'hotdog',
-            img: 'hotdog.png'
+            img: 'images/hotdog.png'
         },
         {
             name: 'ice-cream',
-            img: 'ice-cream.png'
+            img: 'images/ice-cream.png'
         },
         {
             name: 'milkshake',
-            img: 'milkshake.png'
+            img: 'images/milkshake.png'
         },
         {
             name: 'pizza',
-            img: 'pizza.png'
+            img: 'images/pizza.png'
         },
         {
-            name: 'white',
-            img: 'white.png'
+            name: 'fries',
+            img: 'images/fries.png'
+        },
+        {
+            name: 'cheeseburger',
+            img: 'images/cheeseburger.png'
+        },
+        {
+            name: 'hotdog',
+            img: 'images/hotdog.png'
+        },
+        {
+            name: 'ice-cream',
+            img: 'images/ice-cream.png'
+        },
+        {
+            name: 'milkshake',
+            img: 'images/milkshake.png'
+        },
+        {
+            name: 'pizza',
+            img: 'images/pizza.png'
         }
     ]
 
@@ -58,10 +74,16 @@ function checkForMatch(){
     var cards = document.querySelectorAll('img');
     const optionOneId = cardsChosenId[0];
     const optionTwoId = cardsChosenId[1];
-    if(cardsChosen[0] === cardsChosen[1]) {
+    if(optionOneId == optionTwoId){
+        cards[optionOneId].setAttribute('src', 'images/blank.png');
+        cards[optionTwoId].setAttribute('src', 'images/blank.png');
+        alert('You have clicked the same image!');
+    }else if(cardsChosen[0] === cardsChosen[1]) {
         alert('You found a match');
         cards[optionOneId].setAttribute('src','images/white.png');
         cards[optionTwoId].setAttribute('src','images/white.png');
+        cards[optionOneId].removeEventListener('click', flipCard);
+        cards[optionTwoId].removeEventListener('click', flipCard)
         cardsWon.push(cardsChosen);
     }else{
         cards[optionOneId].setAttribute('src','images/blank.png');
