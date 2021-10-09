@@ -115,12 +115,39 @@ class UI {
   }
   //edit expense
   editExpense(element){
+    let id = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
+    //remove from dom
+    this.expenseList.removeChild(parent);
+    //create a new list that contains only the element to be edited
+    let expense = this.itemList.filter(function(item){
+      return item.id === id;
+    });
+    //show value
+    this.expenseInput.value = expense[0].title;
+    this.amountInput.value = expense[0].amount;
+    //remove from list
+    let tempList = this.itemList.filter(function(item){
+      return item.id !== id;
+    });
 
+    this.itemList = tempList;
+    this.showBalance();
   }
 
   //delete expense
-  deleteElement(element){
-
+  deleteExpense(element){
+    //retrieve data stored in the id property of the element
+    let id  = parseInt(element.dataset.id);
+    let parent = element.parentElement.parentElement.parentElement;
+    //remove from dom
+    this.expenseList.removeChild(parent);
+    //remove from list
+    let tempList = this.itemList.filter(function(item){
+      return item.id !== id;
+    });
+    this.itemList = tempList;
+    this.showBalance();
   }
 
 }
@@ -137,21 +164,21 @@ function eventListeners(){
   budgetForm.addEventListener('submit',function(event){
     event.preventDefault();
     ui.submitBudgetForm();
-  })
+  });
 
   //expense form submit
   expenseForm.addEventListener('submit',function(event){
     event.preventDefault();
     ui.submitExpenseForm();
-  })
+  });
 
   expenseList.addEventListener('click',function(event){
     if(event.target.parentElement.classList.contains('edit-icon')){
       ui.editExpense(event.target.parentElement);
     }else if(event.target.parentElement.classList.contains('delete-icon')){
-      ui.deleteElement(even.target.parentElement);
-    }
-  })
+      ui.deleteExpense(event.target.parentElement);
+    }   
+  });
 
   
 }
