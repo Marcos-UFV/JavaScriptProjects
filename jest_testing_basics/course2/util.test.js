@@ -1,4 +1,4 @@
-const {generateText} = require('./util.js');
+const {generateText, checkAndGenerate} = require('./util.js');
 
 test('should output be "Marcos (28 years old)"',() =>{
   const text = generateText('Marcos',28);
@@ -12,3 +12,8 @@ test('should output data-less text',() => {
   expect(text).toBe(' (null years old)');
 });
 
+
+test('should generate a valid text output', () => {
+  const text = checkAndGenerate('Marcos',28);
+  expect(text).toBe('Marcos (28 years old)');
+});
