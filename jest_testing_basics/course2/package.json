@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack app.js --mode development --watch",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [
     "js",
@@ -23,6 +23,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.3.1",
+    "puppeteer": "^11.0.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^4.9.1"
   }
