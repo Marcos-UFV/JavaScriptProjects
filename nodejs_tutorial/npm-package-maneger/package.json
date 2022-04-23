@@ -1,0 +1,14 @@
+{
+  "name": "npm-package-maneger",
+  "version": "1.0.0",
+  "description": "tutorial npm",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcos Aurélio",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
