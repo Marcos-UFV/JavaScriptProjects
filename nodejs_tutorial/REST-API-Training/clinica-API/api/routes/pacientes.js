@@ -12,21 +12,42 @@ pacienteDAO.testaConexao();
 
 router.get('/',(req,res,next) =>{
   const orderQuery = req.query.order?req.query.order:'cd_pac';
-  pacienteDAO.getPacientes(res,orderQuery);
+  pacienteDAO.getPacientes(orderQuery).then(rows =>{
+    res.send(rows);
+  }).catch(err =>{
+    console.log(err);
+  })
 });
 
 router.get('/:id',(req,res,next)=>{
-  pacienteDAO.getPacienteById(res,req.params.id);
+  pacienteDAO.getPacienteById(req.params.id)
+  .then(row =>{
+    res.send(row);
+  }).catch(err =>{
+    console.log(err);
+  })
 })
 
 router.post('/',(req,res,next)=>{
   const paciente = new Paciente(req.body);
-  pacienteDAO.insertPaciente(res,paciente);
+  pacienteDAO.insertPaciente(paciente)
+  .then(row =>{
+    res.send(row);
+  })
+  .catch(err =>{
+    console.log(err);
+  })
 });
 
 router.put('/',(req,res,next)=>{
   const paciente = new Paciente(req.body);
-  pacienteDAO.updatePaciente(res,paciente);
+  pacienteDAO.updatePaciente(paciente)
+  .then(row =>{
+    res.send(row);
+  })
+  .catch(err =>{
+    console.log(err);
+  });
 })
 
 module.exports = router;
