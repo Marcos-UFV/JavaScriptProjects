@@ -43,7 +43,7 @@ class PacienteDAO{
     
   }
 
-  updatePaciente(func,paciente){
+  updatePaciente(paciente){
     const {_cod,_nome,_dataNasc,_codConv} = paciente;
     return new Promise((resolve,reject)=>{
       this._mysqlConnection.query(`UPDATE paciente SET nm_pac='${_nome}',dt_nasc='${_dataNasc}',conv_pac=${_codConv} WHERE cd_pac=${_cod}`,(err,rows,fields)=>{
