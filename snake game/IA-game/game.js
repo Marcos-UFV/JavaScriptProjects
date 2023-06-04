@@ -1,17 +1,17 @@
-window.onload = ()=>{
+// window.onload = ()=>{
 
-  const game = new SnakeGame(640,480);
-  let count = 0;
-  setInterval(()=>{
+//   const game = new SnakeGameIA(640,480);
+//   let count = 0;
+//   setInterval(()=>{
     
-    let action = Action[count % 10];
-    count++;
-    let [gameOver,score,reward] = game.playStep(action);
-    console.log(gameOver,score,reward);
-    if(gameOver) game.reset();
-  },120);
+//     let action = Action[count % 10];
+//     count++;
+//     let [gameOver,score,reward] = game.playStep(action);
+//     console.log(gameOver,score,reward);
+//     if(gameOver) game.reset();
+//   },120);
 
-}
+// }
 const Action = [
  [1,0,0],
  [1,0,0],
@@ -25,10 +25,10 @@ const Action = [
  [1,0,0]
 ]
 const Direction = {
-  RIGHT:1,
-  LEFT:2,
-  UP:3,
-  DOWN:4
+  'RIGHT':1,
+  'LEFT':2,
+  'UP':3,
+  'DOWN':4
 }
 const Colors ={
   WHITE:"'#000000'",
@@ -38,7 +38,7 @@ const Colors ={
   BLACK:"'#000000'"
 }
 const BLOCK_SIZE = 20;
-class SnakeGame{
+class SnakeGameIA{
   
   constructor(width,height){
     this.stage = document.querySelector("#stage");
@@ -99,7 +99,7 @@ class SnakeGame{
    
     // 3. check if game over
     let reward = 0;
-    if(this._isColision() || this.frameIteration > 100*this.snake.length){
+    if(this.isCollision() || this.frameIteration > 100*this.snake.length){
       this.gameOver = true;
       reward = -10;
       return [this.gameOver,this.score,reward];
@@ -118,7 +118,7 @@ class SnakeGame{
     
     return [this.gameOver,this.score,reward];
   }
-  _isColision(pt=null){
+  isCollision(pt=null){
     if(pt == null) pt =this.head;
     // hits boundary
     if(pt.x > this.w - BLOCK_SIZE || pt.x < 0 || pt.y > this.h - BLOCK_SIZE || pt.y < 0) 
@@ -192,3 +192,6 @@ class SnakeGame{
   }
   
 }
+export const SnakeGame = SnakeGameIA;
+export default Direction;
+
